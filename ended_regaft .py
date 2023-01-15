@@ -164,7 +164,7 @@ def registration():
     # кнопка
     pygame.init()
 
-    my_icon = pygame.image.load('logo.png')
+    my_icon = pygame.image.load('data/logo.png')
     pygame.display.set_icon(my_icon)
 
     button = Buttons(130, 45, True, 32)
@@ -179,7 +179,7 @@ def registration():
         size = width, height = 450, 350
         screen = pygame.display.set_mode(size)
 
-        bg = pygame.image.load("fon.jpg")
+        bg = pygame.image.load("data/fon.jpg")
         screen.blit(bg, (0, 0))
 
         draw(screen)
