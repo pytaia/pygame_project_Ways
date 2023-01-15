@@ -1,5 +1,8 @@
 import sqlite3
+import sys
+
 import pygame
+from Frame import Game_process
 
 run, kto = True, 1
 tool_color, tool_message = "blue", ''
@@ -50,7 +53,7 @@ def registration():
             tool_color, tool_message = "red", "Пароли не совпадают!"
             return
 
-        con = sqlite3.connect("data_meny1.db")
+        con = sqlite3.connect("Information_about_player.db")
         cur = con.cursor()
         result = cur.execute(f"""select id from users 
         where login = '{input_text1}'""").fetchall()
@@ -228,12 +231,13 @@ def aftorization():
 
     def conbd():
         global input_text1, input_text2, tool_color, tool_message
-        con = sqlite3.connect("data_meny1.db")
+        con = sqlite3.connect("Information_about_player.db")
         cur = con.cursor()
         result = cur.execute(f"""select id from users 
         where login = '{input_text1}' and password = '{input_text2}'""").fetchall()
         if result:
             tool_color, tool_message = "green", "Выполняю вход..."
+            ex = Game_process(input_text1)
         else:
             tool_color, tool_message = "red", "Неверные данные"
 
@@ -308,7 +312,7 @@ def aftorization():
 
     # кнопка
     pygame.init()
-    my_icon = pygame.image.load('logo.png')
+    my_icon = pygame.image.load('data/logo.png')
     pygame.display.set_icon(my_icon)
     button = Buttons(120, 45, True)
     button2 = Buttons(40, 40, in_c=(40, 212, 180), ac_c=(30, 247, 207))
@@ -322,7 +326,7 @@ def aftorization():
         pygame.display.set_caption('Aftorization')
         size = width, height = 450, 350
         screen = pygame.display.set_mode(size)
-        bg = pygame.image.load("fon.jpg")
+        bg = pygame.image.load("data/fon.jpg")
         screen.blit(bg, (0, 0))
         draw(screen)
         # рисуем кнопку
